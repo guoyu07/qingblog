@@ -1,0 +1,202 @@
+/*
+   Title:  Master style for screen media
+   Author: wwq0327
+   Email:  wwq0327@gmail.com
+*/
+
+body {
+    color: #444;
+    font-size: 85%;
+    background: #fff;
+
+}
+
+/* link */
+a:link, a:visited {
+    color: #369;
+    outline: none;
+}
+
+a:hover {
+    color: #39c;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* 页面结构
+-------------------------------------------------------------*/
+#wrap {
+    margin: 0 auto;
+    padding: 0 auto;
+    min-width: 100%;
+}
+
+#header {
+    padding: 15px 0 20px 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+
+#main {
+    float: left;
+    width: 710px;
+}
+
+#secondary {
+    float: right;
+    width: 230px;
+    background: #ccc;
+}
+
+
+footer {
+    margin-top: 10px;
+    padding: 15px 0;
+    border-top: 1px solid #ddd;
+}
+
+/* header
+-------------------------------------------------------------*/
+#logo {
+    float: left;
+    font-size: 1.68em;
+    font-weight: blod;
+}
+
+#nav {
+    margin-left: 120px;
+}
+
+#nav li {
+    float: left;
+    margin: 2px 15px;
+    padding: 2px;
+    font-size: 1.2em;
+}
+
+/* main styles
+-------------------------------------------------------------*/
+.container {
+    width: 960px;
+    margin: 0 auto;
+}
+
+/* entry */
+
+div.entry h3 {
+    margin-bottom: 15px;
+    font-size: 1.23em;
+}
+
+ul.entry-meta {
+    float: left;
+    width: 150px;
+    font-size: 0.8em;
+    color: #bbb;
+    line-height: 1.6;
+}
+
+div.entry-body {
+    font-size: 0.8125em;
+    line-height: 1.6;
+    float: right;
+    width: 550px;
+}
+
+p.photo {
+    text-align: center;
+}
+
+p.photo img {
+    border: 15px solid #e2e1d4;
+    background: #e2e1d4;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+}
+
+p.photo img:hover {
+    box-shadow: 2px 2px 4px #bbb;
+    -webkit-box-shadow: 2px 2px 4px #bbb;
+    -moz-box-shadow: 2px 2px 4px #bbb;
+}
+
+
+/* secondary styles
+-------------------------------------------------------------*/
+
+
+/* footer styles
+-------------------------------------------------------------*/
+
+.footer {
+
+
+}
+
+/* misc.
+-------------------------------------------------------------*/
+hr, .hide {
+    display: none;
+}
+
+a img {
+    border: none;
+}
+
+/* self-clear floats */
+.group:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+div.error {
+    border: 1px solid #ccc;
+    padding: 2px;
+    margin: 5px 0;
+    background: #CCC;
+}
+
+/* form
+---------------------------------------------------*/
+
+label {
+    display: block;
+}
+
+.ctrl-label {
+    float: left;
+    width: 80px;
+    padding-top: 5px;
+}
+
+.ctrl {
+    padding: 5px 0;
+}
+
+input[type="text"], input[type='password'] {
+    height: 18px;
+    font-size: 13px;
+    padding: 4px;
+    border: 1px solid #ccc;
+}
+
+.input-xlarge {
+    width: 270px;
+}
+
+
+.text-xlarge {
+    width: 620px;
+    height: 200px;
+    font-size: 13px;
+    padding: 4px;
+    border: 1px solid #ccc;
+}
+
