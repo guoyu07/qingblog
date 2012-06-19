@@ -20,3 +20,9 @@ def render_template(template_name, **context):
 
     jinja_env.globals.update(globals)
     return jinja_env.get_template(template_name).render(context)
+
+web.config.smtp_server = 'smtp.gmail.com'
+web.config.smtp_port = 587
+web.config.smtp_username = 'cookbook@gmail.com'
+web.config.smtp_password = 'secret'
+web.config.smtp_starttls = True

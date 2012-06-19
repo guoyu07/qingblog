@@ -3,7 +3,6 @@
 import web
 from settings import render_template
 
-class Index:
+class Register:
     def GET(self):
-        return render_template("index.html")
-
+        return render_template("auth/reg.html")

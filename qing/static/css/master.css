@@ -77,6 +77,15 @@ footer {
     font-size: 1.2em;
 }
 
+.hero-unit {
+    font-size:3em;
+    font-height: blod;
+    display: block;
+    padding: 120px 0;
+    text-align: center;
+
+}
+
 /* main styles
 -------------------------------------------------------------*/
 .container {
@@ -200,3 +209,17 @@ input[type="text"], input[type='password'] {
     border: 1px solid #ccc;
 }
 
+.login-form {
+    margin-bottom: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-form label {
+    float: left;
+    vertical-align:middle
+}
+
+.login-form p {
+    float: left;
+}
