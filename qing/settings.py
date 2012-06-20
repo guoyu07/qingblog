@@ -3,6 +3,7 @@
 import os
 import web
 from jinja2 import Environment, FileSystemLoader
+from sqlalchemy import create_engine
 
 web.config.debug = True
 
@@ -21,8 +22,11 @@ def render_template(template_name, **context):
     jinja_env.globals.update(globals)
     return jinja_env.get_template(template_name).render(context)
 
-web.config.smtp_server = 'smtp.gmail.com'
-web.config.smtp_port = 587
-web.config.smtp_username = 'cookbook@gmail.com'
-web.config.smtp_password = 'secret'
+#database config
+engine = create_engine('sqlite:///qing.db', encoding="utf-8", echo=True)
+
+web.config.smtp_server = 'smtp.mailgun.org'
+#web.config.smtp_port = 587
+web.config.smtp_username = 'postmaster@sll.mailgun.org'
+web.config.smtp_password = '5yh0dp3nk5m3'
 web.config.smtp_starttls = True
