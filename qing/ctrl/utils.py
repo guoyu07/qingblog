@@ -32,3 +32,10 @@ def render_mail(filename, **context):
 
     return t.render(**context)
 
+def login_required(func):
+    def function(*args):
+        if web.ctx.session.login == 0:
+            raise web.seeother('/auth/login')
+        else:
+            return func(*args)
+        return function

@@ -4,10 +4,18 @@ import web
 from settings import render_template
 
 from models import User, UserSignup
-from ctrl.utils import gen_sha1, hash_password, render_mail, check_password
+from ctrl.utils import gen_sha1, hash_password, render_mail, check_password, login_required
+
+## def login_required(func):
+##     def function(*args):
+##         if web.ctx.session.login == 0:
+##             raise web.seeother('/auth/login')
+##         else:
+##             return func(*args)
+##         return function
 
 class Login:
-    def GET():
+    def GET(self):
         if web.ctx.session.login == 1:
             raise web.seeother('/home')
 
@@ -21,6 +29,12 @@ class Login:
         if user and check_password(user.password, password):
             web.ctx.session.login = 1
             raise web.seeother('/home')
+
+class Logout:
+    @login_required
+    def GET(self):
+        web.ctx.session.kill()
+        raise web.seeother("/auth/login")
 
 class Register:
     def GET(self):
@@ -71,6 +85,7 @@ class Active:
             return 'error'
 
 class Succ:
+    @login_required
     def GET(self):
         return 'succ!'
 
