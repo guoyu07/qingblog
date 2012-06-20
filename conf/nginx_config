@@ -1,0 +1,4 @@
+
+wyatt@ubuntu:~/git/djnote/conf$ sudo groupadd -r -g 456 nginx
+wyatt@ubuntu:~/git/djnote/conf$ sudo useradd -r -u 456 -g nginx -m -c "nginx user" -d /var/cache/nginx -s /sbin/nolgin nginx
+
