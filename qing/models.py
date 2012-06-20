@@ -50,8 +50,22 @@ class UserSignup(Base):
     def _repr__(self):
         return "<UserSignup (%s)>" % str(self.id)
 
+class Profile(Base):
+    __tablename__ = 'profiles'
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    username = Column(String, unique=True)
+    comeform = Column(String)
+    jj = Column(Text)
+    user = relationship("User", backref=backref('profiles', uselist=False))
+
+    def __repr__(self):
+        return '<Profile <%d: "%s">' % (self.user_id, self.username)
+
 users_table = User.__table__
 user_signup_table = UserSignup.__table__
+profiles_table = Profile.__table__
 
 metadata = Base.metadata
 

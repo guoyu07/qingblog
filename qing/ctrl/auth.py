@@ -4,12 +4,28 @@ import web
 from settings import render_template
 
 from models import User, UserSignup
-from ctrl.utils import gen_sha1, hash_password, render_mail
+from ctrl.utils import gen_sha1, hash_password, render_mail, check_password
+
+class Login:
+    def GET():
+        if web.ctx.session.login == 1:
+            raise web.seeother('/home')
+
+    def POST(self):
+        i = web.input()
+        email = i.email.strip()
+        password = i.password
+
+        user = web.ctx.orm.query(User).filter(User.email==email).first()
+
+        if user and check_password(user.password, password):
+            web.ctx.session.login = 1
+            raise web.seeother('/home')
 
 class Register:
     def GET(self):
         if web.ctx.session.login == 1:
-            raise web.seeother('/dashboad')
+            raise web.seeother('/home')
 
         return render_template("auth/reg.html")
 
@@ -29,6 +45,7 @@ class Register:
         if u:
             active_key = gen_sha1(u.email)
             context['active_key'] = active_key
+            context['uid'] = u.id
             user_signup = UserSignup(user=u, active_key=active_key)
             web.ctx.orm.add(user_signup)
             web.ctx.orm.commit()
@@ -41,11 +58,20 @@ class Register:
         else:
             raise
 
-
+class Active:
+    def GET(self, uid, ac_key):
+        user = web.ctx.orm.query(UserSignup).filter(UserSignup.id==int(uid)).\
+               filter(UserSignup.active_key==ac_key).first()
+        if user:
+            u = web.ctx.orm.query(User).filter(User.id==int(uid)).first()
+            u.actived = 1
+            user.active_key = '1'
+            web.ctx.orm.commit()
+        else:
+            return 'error'
 
 class Succ:
     def GET(self):
         return 'succ!'
-
 
 

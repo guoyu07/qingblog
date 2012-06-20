@@ -4,6 +4,6 @@ hi,
 
 你所注册的帐号还处于未激活状态，点击下面的链接即可完成激活：
 
-http://sllopen.tk/auth/active/{{ active_key }}
+http://sllopen.tk/auth/active/{{ uid }}/{{ active_key }}
 
 欢迎你使用我们的网站！
