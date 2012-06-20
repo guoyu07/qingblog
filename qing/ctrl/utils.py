@@ -2,6 +2,8 @@
 
 import random
 import hashlib
+import web
+from jinja2 import Template
 
 def gen_sha1(string, salt=None):
     """用于生成激活码"""
@@ -13,7 +15,7 @@ def gen_sha1(string, salt=None):
 
     return hash
 
-de hash_password(password):
+def hash_password(password):
     """密码生成"""
 
     return str(hashlib.sha1(password+'572').hexdigest())
@@ -23,4 +25,10 @@ def check_password(db_pw, in_pw):
 
     inp = hash_password(in_pw)
     return db_pw == inp
+
+def render_mail(filename, **context):
+    f = open(filename, 'r')
+    t = Template(f.read().decode('utf-8'))
+
+    return t.render(**context)
 

@@ -6,6 +6,8 @@ import web
 from urls import urls
 from models import load_sqla
 
+app = web.application(urls, globals(), autoreload=True)
+
 if web.config.get('_session') is None:
     store = web.session.DiskStore('sessions')
     session = web.session.Session(app, store, initializer={'login':0, 'username':''})
@@ -15,8 +17,6 @@ else:
 
 def session_hook():
     web.ctx.session = session
-
-app = web.application(urls, globals(), autoreload=True)
 
 app.add_processor(web.loadhook(session_hook))
 app.add_processor(load_sqla)
