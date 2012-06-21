@@ -3,7 +3,6 @@ var REG_EMAIL = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{
 $(function() {
     // login
     var login_email = $("#id_login_email");
-    var reg_email = $("#id_reg_email");
     var login_pw = $("#id_login_pw");
     var login_checked = true;
 
@@ -57,9 +56,9 @@ $(function() {
                 data: {'email': reg_email.val()},
                 type: 'post',
                 success: function(data){
-                    if(data==='1'){
-                        $(".email-error").html("该邮件已被注册");
+                    if(data=='1'){
                         reg_checked=false;
+                        $(".email-error").html("该邮件已被注册");
                     }else{
                         $(".email-error").html("");
                     }
@@ -84,7 +83,6 @@ $(function() {
         reg_checked=true;
         reg_email.blur();
         reg_pw.blur();
-
         return reg_checked;
 
     });
