@@ -10,16 +10,18 @@
     <form action="/auth/login" method="post" class="login-form">
       <p>
         <label>邮箱</label>
-        <input type="text" name="email" />
+        <input type="text" name="email" id="id_login_email"/>
       </p>
       <p>
         <label>密码</label>
-        <input type="password" name="password" />
+        <input type="password" name="password" id="id_login_pw"/>
       </p>
       <p>
         <button type="submit">登录</button>
       </p>
     </form>
+      <span class="email-error"></span>
+      <span class="pw-error"></span>
     <div class="login-info">
       <p><a href="/auth/reg">注册</a>|<a href="#">忘记密码</a></p>
     </div>
