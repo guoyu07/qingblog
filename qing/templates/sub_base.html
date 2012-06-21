@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block wrap %}
+
+<div id="header" class="group">
+  <div class="container">
+    <div id="logo">
+      Qing博客
+    </div>
+
+    <ul id="nav">
+      <li><a href="/">首页</a></li>
+      <li><a href="#">Home</a></li>
+    </ul>
+  </div><!-- end container -->
+</div><!-- end header -->
+<hr />
+
+<div class="group container">
+  <div id="main">
+    <div class="content_title">
+      {% block content_title %}{% endblock %}
+    </div>
+
+    {% block content %}{% endblock %}
+  </div><!-- end main -->
+  <hr />
+
+  <div class="secondary">
+    {% block secondary %}{% endblock %}
+  </div>
+</div><!-- end group -->
+
+{% endblock %}
+

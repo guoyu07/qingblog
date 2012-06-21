@@ -28,6 +28,7 @@ class Login:
 
         if user and check_password(user.password, password):
             web.ctx.session.login = 1
+            web.ctx.session.email = user.email
             raise web.seeother('/home')
 
 class Logout:
@@ -85,8 +86,10 @@ class Active:
             return 'error'
 
 class Succ:
-    @login_required
     def GET(self):
-        return 'succ!'
+        context = {}
+        context['email'] = web.ctx.session.email
+
+        return render_template("auth/succ.html", **context)
 
 
