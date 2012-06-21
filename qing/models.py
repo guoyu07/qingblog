@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import datetime
+import markdown
 
 import web
 
@@ -63,9 +64,34 @@ class Profile(Base):
     def __repr__(self):
         return '<Profile <%d: "%s">' % (self.user_id, self.username)
 
+class Post(Base):
+    __tablename__ = 'posts'
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    title = Column(String, nullable=False)
+    content = Column(Text)
+    content_html = Column(Text, nullable=True)
+    pub_date = Column(DateTime, default=datetime.datetime.now)
+    user = relationship("User", backref=backref('posts', lazy="dynamic"))
+
+    def __init__(self, user_id, title, content):
+        self.user_id = user_id
+        self.title = title
+        self.content = content
+        self.content_html = markdown.markdown(content)
+
+    def __repr__(self):
+        return '<Post <%d : %s">' % (self.id, self.title)
+
+    def get_absolute_url(self):
+        if self.id:
+            return "/posts/%d" % self.id
+
 users_table = User.__table__
 user_signup_table = UserSignup.__table__
 profiles_table = Profile.__table__
+posts_table = Post.__table__
 
 metadata = Base.metadata
 
