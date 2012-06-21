@@ -3,7 +3,7 @@ var REG_EMAIL = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{
 $(function() {
     // login
     var login_email = $("#id_login_email");
-    var reg_email = $("id_reg_email");
+    var reg_email = $("#id_reg_email");
     var login_pw = $("#id_login_pw");
     var login_checked = true;
 
