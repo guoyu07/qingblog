@@ -20,13 +20,17 @@ class Login:
 
         if user and check_password(user.password, password):
             web.ctx.session.login = 1
-            web.ctx.session.email = user.email
+            web.ctx.session.username = user.username
             raise web.seeother('/home')
+        else:
+            web.ctx.msg = u'帐号不存在或与密码符，请重新核对'
+            raise web.seeother('/auth/login')
 
 class Logout:
     @login_required
     def GET(self):
         web.ctx.session.kill()
+        web.ctx.session.msg=u"已正常退出，请重新登录"
         raise web.seeother("/auth/login")
 
 class Register:
@@ -101,7 +105,7 @@ class SetProfile:
             po = Profile(username=username, user_id=user.id, comefrom=comefrom, jj=jj)
             web.ctx.orm.add(po)
             web.ctx.orm.commit()
-            web.ctx.session.login=1
+            web.ctx.session.login = 1
             web.ctx.session.username=username
             raise web.seeother('/home')
 
