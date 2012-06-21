@@ -1,0 +1,30 @@
+{% extends "sub_base.html" %}
+
+{% block title %}设置首次登录的个人信息{% endblock %}
+
+{% block content_title %}首次登录个人信息设置{% endblock %}
+
+{% block content %}
+
+<p class="msg-info">你的注册信箱是：　{{ email }}</p>
+
+<form action="." mehtod="post" class="form-set-profile">
+  <p class="ctrl">
+    <label class="ctrl-label">用户名</label>
+    <input type="text" name="username" class="input-xlarge"/>
+  </p>
+  <p class="ctrl">
+    <label class="ctrl-label">你来自</label>
+    <input type="text" name="comefrom" class="input-xlarge"/>
+  </p>
+  <p class="ctrl">
+    <label>个人简介</label>
+    <textarea name="jj" class="text-xlarge"></textarea>
+  </p>
+
+  <p class="ctrl">
+    <button type="submit">确认</button>
+  </p>
+</form>
+
+{% endblock %}

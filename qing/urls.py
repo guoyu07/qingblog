@@ -4,6 +4,7 @@ urls = (
     '/', 'ctrl.index.Index',
     #auth
     '/auth/login', 'ctrl.auth.Login',
+    '/auth/setpo', 'ctrl.auth.SetProfile',
     '/auth/logout', 'ctrl.auth.Logout',
     '/auth/reg', 'ctrl.auth.Register',
     '/auth/succ', 'ctrl.auth.Succ',

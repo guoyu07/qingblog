@@ -6,14 +6,6 @@ from settings import render_template
 from models import User, UserSignup
 from ctrl.utils import gen_sha1, hash_password, render_mail, check_password, login_required
 
-## def login_required(func):
-##     def function(*args):
-##         if web.ctx.session.login == 0:
-##             raise web.seeother('/auth/login')
-##         else:
-##             return func(*args)
-##         return function
-
 class Login:
     def GET(self):
         if web.ctx.session.login == 1:
@@ -64,7 +56,7 @@ class Register:
             user_signup = UserSignup(user=u, active_key=active_key)
             web.ctx.orm.add(user_signup)
             web.ctx.orm.commit()
-            web.ctx.session.login = 1
+            #web.ctx.session.login = 1
             web.ctx.session.email = email
             web.sendmail(web.config.smtp_username, email, u'注册邮件',
                          render_mail('templates/auth/activation_email_message.txt', **context))
@@ -82,8 +74,17 @@ class Active:
             u.actived = 1
             user.active_key = '1'
             web.ctx.orm.commit()
+            raise web.seeother('/auth/setpo')
         else:
             return 'error'
+
+class SetProfile:
+    def GET(self):
+        context = {}
+        email = web.ctx.session.email
+        context['email'] = email
+
+        return render_template("auth/set_profile.html", **context)
 
 class Succ:
     def GET(self):
