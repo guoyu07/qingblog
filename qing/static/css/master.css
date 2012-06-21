@@ -210,12 +210,12 @@ input[type="text"], input[type='password'] {
     border: 1px solid #ccc;
 }
 
-.login-form {
+.login-form, .reg-form {
     margin-bottom: 30px;
     margin-left: 200px;
 }
 
-.login-form label {
+.login-form label, .reg-form label {
     font-size: 18px;
     display: block;
     padding-top: 4px;
@@ -224,12 +224,12 @@ input[type="text"], input[type='password'] {
     vertical-align:middle
 }
 
-.login-form p {
+.login-form p, .reg-form p {
     float: left;
     margin-right: 10px;
 }
 
-.login-info p {
+.login-info p{
     margin-left: 200px;
     margin-top: 15px;
 }

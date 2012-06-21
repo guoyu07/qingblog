@@ -3,6 +3,7 @@ var REG_EMAIL = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{
 $(function() {
     // login
     var login_email = $("#id_login_email");
+    var reg_email = $("id_reg_email");
     var login_pw = $("#id_login_pw");
     var login_checked = true;
 
@@ -33,6 +34,27 @@ $(function() {
     $(".login-form").submit(function(){
         login_checked=true;
         login_email.blur();
+        login_pw.blur();
+
+        return login_checked;
+    });
+
+    // reg
+    reg_email.blur(function() {
+        if(reg_email.val() === ''){
+            $(".email-error").html("请输入邮箱地址");
+            login_checked = false;
+        }else if(!REG_EMAIL.test(reg_email.val())){
+            $(".email-error").html("箱邮格式不正确");
+            login_checked = false;
+        }else{
+            $(".email-error").html("");
+        }
+    })
+
+    $(".reg-form").submit(function(){
+        login_checked=true;
+        reg_email.blur();
         login_pw.blur();
 
         return login_checked;
