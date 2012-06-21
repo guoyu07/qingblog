@@ -69,6 +69,14 @@ class Register:
         else:
             raise
 
+class CheckEmail:
+    def POST(self):
+        i = web.input()
+        email = i.email.strip()
+        user = web.ctx.orm.query(User).filter(User.email==email).first()
+        if user:
+            return '1'
+
 class Active:
     def GET(self, uid, ac_key):
         user = web.ctx.orm.query(UserSignup).filter(UserSignup.id==int(uid)).\
@@ -116,5 +124,4 @@ class Succ:
         context['email'] = web.ctx.session.email
 
         return render_template("auth/succ.html", **context)
-
 

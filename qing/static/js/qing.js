@@ -40,24 +40,53 @@ $(function() {
     });
 
     // reg
+    var reg_email = $("#id_reg_email");
+    var reg_pw = $("#id_reg_pw");
+    var reg_checked=true;
+
     reg_email.blur(function() {
         if(reg_email.val() === ''){
             $(".email-error").html("请输入邮箱地址");
-            login_checked = false;
+            reg_checked = false;
         }else if(!REG_EMAIL.test(reg_email.val())){
             $(".email-error").html("箱邮格式不正确");
-            login_checked = false;
+            reg_checked = false;
         }else{
-            $(".email-error").html("");
+            $.ajax({
+                url: '/auth/ckemail',
+                data: {'email': reg_email.val()},
+                type: 'post',
+                success: function(data){
+                    if(data==='1'){
+                        $(".email-error").html("该邮件已被注册");
+                        reg_checked=false;
+                    }else{
+                        $(".email-error").html("");
+                    }
+                }
+            });
+        }
+    })
+
+    reg_pw.blur(function(){
+        if(reg_pw.val() === ''){
+            $(".pw-error").html("请输入密码");
+            reg_checked = false;
+        }else if(reg_pw.val().length < 6){
+            $(".pw-error").html("密码不能小于六个字符");
+            reg_checked = false;
+        }else{
+            $(".pw-error").html("");
         }
     })
 
     $(".reg-form").submit(function(){
-        login_checked=true;
+        reg_checked=true;
         reg_email.blur();
-        login_pw.blur();
+        reg_pw.blur();
 
-        return login_checked;
+        return reg_checked;
+
     });
 });
 
