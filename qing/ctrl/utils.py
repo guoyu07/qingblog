@@ -38,4 +38,4 @@ def login_required(func):
             raise web.seeother('/auth/login')
         else:
             return func(*args)
-        return function
+    return function
