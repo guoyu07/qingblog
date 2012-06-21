@@ -56,7 +56,7 @@ class Profile(Base):
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('users.id'))
     username = Column(String, unique=True)
-    comeform = Column(String)
+    comefrom = Column(String)
     jj = Column(Text)
     user = relationship("User", backref=backref('profiles', uselist=False))
 

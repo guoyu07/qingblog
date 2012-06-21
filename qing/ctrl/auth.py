@@ -3,7 +3,7 @@
 import web
 from settings import render_template
 
-from models import User, UserSignup
+from models import User, UserSignup, Profile
 from ctrl.utils import gen_sha1, hash_password, render_mail, check_password, login_required
 
 class Login:
@@ -74,6 +74,7 @@ class Active:
             u.actived = 1
             user.active_key = '1'
             web.ctx.orm.commit()
+            web.ctx.session.uid = uid
             raise web.seeother('/auth/setpo')
         else:
             return 'error'
@@ -83,8 +84,27 @@ class SetProfile:
         context = {}
         email = web.ctx.session.email
         context['email'] = email
+        context['uid'] = web.ctx.session.uid
 
         return render_template("auth/set_profile.html", **context)
+
+    def POST(self):
+        i = web.input()
+        username = i.username.strip()
+        uid = i.uid
+        comefrom = i.comefrom
+        jj = i.jj
+
+        user = web.ctx.orm.query(User).filter(User.id==int(uid)).first()
+
+        if user:
+            po = Profile(username=username, user_id=user.id, comefrom=comefrom, jj=jj)
+            web.ctx.orm.add(po)
+            web.ctx.orm.commit()
+            web.ctx.session.login=1
+            web.ctx.session.username=username
+            raise web.seeother('/home')
+
 
 class Succ:
     def GET(self):

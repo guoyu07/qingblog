@@ -8,7 +8,7 @@
 
 <p class="msg-info">你的注册信箱是：　{{ email }}</p>
 
-<form action="." mehtod="post" class="form-set-profile">
+<form action="/auth/setpo" method="post" class="form-set-profile">
   <p class="ctrl">
     <label class="ctrl-label">用户名</label>
     <input type="text" name="username" class="input-xlarge"/>
@@ -21,7 +21,7 @@
     <label>个人简介</label>
     <textarea name="jj" class="text-xlarge"></textarea>
   </p>
-
+  <input type="hidden" name="uid" value="{{ uid }}" />
   <p class="ctrl">
     <button type="submit" class="btn right">确认</button>
   </p>
