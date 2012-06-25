@@ -34,16 +34,16 @@ $(function() {
         login_checked=true;
         login_email.blur();
         login_pw.blur();
-
         return login_checked;
     });
 
-    // reg
+    // 用户注册
     var reg_email = $("#id_reg_email");
     var reg_pw = $("#id_reg_pw");
     var reg_checked=true;
 
     reg_email.blur(function() {
+        var self = $(this);
         if(reg_email.val() === ''){
             $(".email-error").html("请输入邮箱地址");
             reg_checked = false;
@@ -51,22 +51,17 @@ $(function() {
             $(".email-error").html("箱邮格式不正确");
             reg_checked = false;
         }else{
-            $.ajax({
-                url: '/auth/ckemail',
-                data: {'email': reg_email.val()},
-                type: 'post',
-                success: function(data){
-                    if(data=='1'){
-                        $(".email-error").html("该邮件已被注册");
-                        reg_checked=false;
-                        alert(reg_checked);
-                    }else{
-                        $(".email-error").html("");
-                    }
+            checkEmail(reg_email.val(), function(isReg){
+                if (isReg){
+                    $(".email-error").html("用户名已被注册");
+                    reg_checked=false;
+                } else {
+                    $(".email-error").html("");
+                    reg_checked=true;
                 }
             });
         }
-    })
+    });
 
     reg_pw.blur(function(){
         if(reg_pw.val() === ''){
@@ -78,14 +73,33 @@ $(function() {
         }else{
             $(".pw-error").html("");
         }
-    })
+    });
 
     $(".reg-form").submit(function(){
-        reg_checked=true;
+
         reg_email.blur();
+//        alert(reg_checked);
         reg_pw.blur();
         return reg_checked;
-
-    });
+    })
 });
+
+function checkEmail(email, callBack){
+    if(typeof(callBack) !== "function"){
+        callBack = function(){};
+    }
+
+    $.ajax({
+        url: '/auth/ckemail',
+        data: {'email': email},
+        type: "POST",
+        success: function(data){
+            if(data==='1'){
+                callBack(true);
+            }else{
+                callBack(false);
+            }
+        }
+    });
+}
 

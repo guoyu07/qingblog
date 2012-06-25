@@ -75,6 +75,7 @@ class CheckEmail:
         email = i.email.strip()
         user = web.ctx.orm.query(User).filter(User.email==email).first()
         if user:
+            ## print 1
             return '1'
 
 class Active:
