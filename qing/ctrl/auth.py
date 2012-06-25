@@ -18,12 +18,12 @@ class Login:
 
         user = web.ctx.orm.query(User).filter(User.email==email).first()
 
-        if user and check_password(user.password, password):
+        if user and user.actived and check_password(user.password, password):
             web.ctx.session.login = 1
-            web.ctx.session.username = user.username
+            #web.ctx.session.username = user.username
             raise web.seeother('/home')
         else:
-            web.ctx.msg = u'帐号不存在或与密码符，请重新核对'
+            web.ctx.msg = u'帐号不存在或与密码符，请重新核对或该帐号还未激活'
             raise web.seeother('/auth/login')
 
 class Logout:
@@ -117,6 +117,9 @@ class SetProfile:
             web.ctx.session.login = 1
             web.ctx.session.username=username
             raise web.seeother('/home')
+        esle:
+            web.ctx.msg = u"该帐号已激活过")
+            raise web.seeother("/")
 
 
 class Succ:
