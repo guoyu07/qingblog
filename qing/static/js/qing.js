@@ -57,8 +57,9 @@ $(function() {
                 type: 'post',
                 success: function(data){
                     if(data=='1'){
-                        reg_checked=false;
                         $(".email-error").html("该邮件已被注册");
+                        reg_checked=false;
+                        alert(reg_checked);
                     }else{
                         $(".email-error").html("");
                     }
