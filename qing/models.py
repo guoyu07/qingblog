@@ -8,23 +8,9 @@ import web
 from sqlalchemy import create_engine, ForeignKey
 from sqlalchemy import Column, Integer, String, Boolean, DateTime, Text
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import scoped_session, sessionmaker, relationship, backref
+from sqlalchemy.orm import relationship, backref
 
 from settings import engine
-
-def load_sqla(handler):
-    web.ctx.orm = scoped_session(sessionmaker(bind=engine))
-    try:
-        return handler()
-    except web.HTTPError:
-        web.ctx.orm.commit()
-        raise
-    except:
-        web.ctx.orm.rollback()
-        raise
-    finally:
-        web.ctx.orm.commit()
-        web.ctx.orm.close()
 
 Base = declarative_base()
 

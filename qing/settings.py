@@ -4,7 +4,7 @@ import os
 import web
 from jinja2 import Environment, FileSystemLoader
 from sqlalchemy import create_engine
-
+from sqlalchemy.orm import scoped_session, sessionmaker
 web.config.debug = True
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -24,6 +24,20 @@ def render_template(template_name, **context):
 
 #database config
 engine = create_engine('sqlite:///qing.db', encoding="utf-8", echo=True)
+
+def load_sqla(handler):
+    web.ctx.orm = scoped_session(sessionmaker(bind=engine))
+    try:
+        return handler()
+    except web.HTTPError:
+        web.ctx.orm.commit()
+        raise
+    except:
+        web.ctx.orm.rollback()
+        raise
+    finally:
+        web.ctx.orm.commit()
+        web.ctx.orm.close()
 
 web.config.smtp_server = 'smtp.mailgun.org'
 #web.config.smtp_port = 587

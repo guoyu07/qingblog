@@ -4,7 +4,7 @@
 import web
 
 from urls import urls
-from models import load_sqla
+from settings import load_sqla
 
 app = web.application(urls, globals(), autoreload=True)
 
