@@ -1,10 +1,16 @@
 import web
-
-## class Index:
-##     def GET(self):
-##         if web.ctx.session.login == 1:
-##             raise web.seeother("/home")
+from settings import render_template
+from utils import login_required
+from models import Profile
 
 class Home:
+    @login_required
     def GET(self):
-        return "home" + str(web.ctx.session.login)+web.ctx.session.username
+
+        context = {}
+        uid = web.ctx.session.uid
+        po = web.ctx.orm.query(Profile).filter(Profile.user_id==int(uid)).first()
+
+        context['username'] = po.username
+
+        return render_template("home.html", **context)

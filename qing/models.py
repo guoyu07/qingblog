@@ -84,14 +84,22 @@ class Post(Base):
     def __repr__(self):
         return '<Post <%d : %s">' % (self.id, self.title)
 
+    @property
     def get_absolute_url(self):
         if self.id:
-            return "/posts/%d" % self.id
+            return "/post/%d" % self.id
+    @property
+    def get_post_user(self):
+        user = web.ctx.orm.query(Profile).filter(Profile.user_id==self.user_id).first()
+        if user:
+            return user.username
+        else:
+            return None
 
-users_table = User.__table__
-user_signup_table = UserSignup.__table__
-profiles_table = Profile.__table__
-posts_table = Post.__table__
+users_table       =    User.__table__
+user_signup_table =    UserSignup.__table__
+profiles_table    =    Profile.__table__
+posts_table       =    Post.__table__
 
 metadata = Base.metadata
 

@@ -1,0 +1,19 @@
+{% extends "sub_base.html" %}
+
+{% block title %}post{% endblock %}
+
+{% block content_title %}{{ post.title|safe }}{% endblock %}
+
+{% block content %}
+
+<div id="post">
+  <div class="post-info">
+    Date: {{ post.pub_date.strftime("%Y-%m-%d %H:%I") }} Author: {{ post.get_post_user }}
+  </div>
+
+  <div class="post">
+    {{ post.content_html|safe }}
+  </div>
+</div>
+
+{% endblock %}

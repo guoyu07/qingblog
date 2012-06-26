@@ -1,0 +1,11 @@
+{% extends "sub_base.html" %}
+
+{% block title %}个人首页{% endblock %}
+
+{% block content_title %}{{ username }}的个人首页{% endblock %}
+
+{% block content %}
+
+<a href="/posts/add">添加文字</a> | <a href="/posts/list">文字列表</a>
+
+{% endblock %}

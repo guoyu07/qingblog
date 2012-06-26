@@ -274,3 +274,17 @@ form {
     margin: 5px 0;
     padding: 5px 0;
 }
+
+/*posts
+**************************************/
+
+h3.post-title {
+    font-size: 14pt;
+    font-height: blod;
+}
+
+.post p {
+    line-height: 25px;
+}
+
+

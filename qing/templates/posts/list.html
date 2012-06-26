@@ -1,0 +1,20 @@
+{% extends "sub_base.html" %}
+
+{% block title %}post list{% endblock %}
+
+{% block content_title %}post list{% endblock %}
+
+{% block content %}
+
+{% if posts %}
+  {% for post in posts %}
+    <div id="post">
+      <div><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></div>
+      <div>{{ post.content_html }}</div>
+    </div>
+  {% endfor %}
+{% else %}
+  <p>暂无文字内容</p>
+{% endif %}
+
+{% endblock %}

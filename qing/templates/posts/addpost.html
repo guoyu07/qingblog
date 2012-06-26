@@ -1,11 +1,23 @@
 {% extends "sub_base.html" %}
 
-{% block title %}添加新日志{% endblock %}
+{% block title %}添加文字{% endblock %}
 
-{% block content_title %}添加新日志{% endblock %}
+{% block content_title %}添加文字{% endblock %}
 
 {% block content %}
 
-添加新日志
+<form action="" method="post" class="post-form">
+  <p class="ctrl">
+    <label class="ctrl-label">标题</label>
+    <input type="text" name="title" class="input-xlarge"/>
+  </p>
+  <p class="ctrl">
+    <label class="ctrl-label">内容</label>
+    <textarea name="content" class="text-xlarge"></textarea>
+  </p>
+  <p>
+    <button type="submit" class="btn right">发布</button>
+  </p>
+</form>
 
 {% endblock %}

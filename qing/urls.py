@@ -13,4 +13,6 @@ urls = (
     '/home', 'ctrl.home.Home',
     #posts
     '/posts/add', 'ctrl.posts.AddPost',
+    '/post/(?P<pid>\d+)', 'ctrl.posts.SignPost',
+    '/posts/list', 'ctrl.posts.PostList',
     )
