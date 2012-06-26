@@ -20,7 +20,7 @@ class Login:
 
         if user and user.actived and check_password(user.password, password):
             web.ctx.session.login = 1
-            #web.ctx.session.username = user.username
+            web.ctx.session.uid = user.id
             raise web.seeother('/home')
         else:
             web.ctx.msg = u'帐号不存在或与密码符，请重新核对或该帐号还未激活'
@@ -95,9 +95,11 @@ class Active:
 class SetProfile:
     def GET(self):
         context = {}
-        email = web.ctx.session.email
+        uid = web.ctx.session.uid
+        user = web.ctx.orm.query(User).filter(User.id==int(uid)).first()
+        email = user.email
         context['email'] = email
-        context['uid'] = web.ctx.session.uid
+        context['uid'] = uid
 
         return render_template("auth/set_profile.html", **context)
 
@@ -117,8 +119,8 @@ class SetProfile:
             web.ctx.session.login = 1
             web.ctx.session.username=username
             raise web.seeother('/home')
-        esle:
-            web.ctx.msg = u"该帐号已激活过")
+        else:
+            web.ctx.msg = u"该帐号已激活过或用户不存在"
             raise web.seeother("/")
 
 
