@@ -31,7 +31,7 @@ class Logout:
     def GET(self):
         web.ctx.session.kill()
         web.ctx.session.msg=u"已正常退出，请重新登录"
-        raise web.seeother("/auth/login")
+        raise web.seeother("/")
 
 class Register:
     def GET(self):
