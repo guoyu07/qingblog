@@ -7,8 +7,9 @@ from ctrl.utils import login_required
 from models import Post
 
 class PostList:
+    @login_required
     def GET(self):
-        context = {}
+        context = web.ctx.request
         uid = web.ctx.session.uid
         posts = web.ctx.orm.query(Post).filter(Post.user_id==int(uid)).order_by('posts.id DESC')
         context['posts'] = posts
@@ -18,7 +19,8 @@ class PostList:
 class AddPost:
     @login_required
     def GET(self):
-        return render_template("posts/addpost.html")
+        context = web.ctx.request
+        return render_template("posts/addpost.html", **context)
 
     def POST(self):
         i = web.input()
@@ -33,7 +35,7 @@ class AddPost:
 
 class SignPost:
     def GET(self, pid):
-        context = {}
+        context = web.ctx.request
         post = web.ctx.orm.query(Post).filter(Post.id==int(pid)).first()
 
         context['post'] = post
