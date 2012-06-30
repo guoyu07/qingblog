@@ -42,12 +42,12 @@ img {
 
 #main {
     float: left;
-    width: 710px;
+    width: 820px;
 }
 
 #secondary {
     float: right;
-    width: 230px;
+    width: 120px;
     background: #ccc;
 }
 
@@ -203,7 +203,7 @@ input[type="text"], input[type='password'] {
 
 .text-xlarge {
     margin-left: 60px;
-    width: 620px;
+    width: 730px;
     height: 200px;
     font-size: 13px;
     padding: 4px;
@@ -283,8 +283,19 @@ h3.post-title {
     font-height: blod;
 }
 
-.post p {
-    line-height: 25px;
+#post p {
+    line-height: 24px;
 }
 
+#post {
+    margin: 10px 0 20px 0;
+    padding: 15px 5px;
+    border: 1px solid #ddd;
+}
+
+.post-title {
+    margin: 5px 0;
+    padding: 5px 0;
+
+}
 

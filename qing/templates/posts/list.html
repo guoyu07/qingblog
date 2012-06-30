@@ -9,8 +9,8 @@
 {% if posts %}
   {% for post in posts %}
     <div id="post">
-      <div><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></div>
-      <div>{{ post.content_html }}</div>
+      <div class="post-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a> -- {{ post.get_post_user }}</div>
+      <div class="post-content">{{ post.content_html }}</div>
     </div>
   {% endfor %}
 {% else %}
