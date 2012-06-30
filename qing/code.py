@@ -18,8 +18,14 @@ else:
 def session_hook():
     web.ctx.session = session
 
+def request_hook():
+    request = {}
+    request['user'] = web.ctx.session.username
+    web.ctx.request = request
+
 app.add_processor(web.loadhook(session_hook))
 app.add_processor(load_sqla)
+app.add_processor(web.loadhook(request_hook))
 
 if __name__ == '__main__':
     app.run()

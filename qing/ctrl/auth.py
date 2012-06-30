@@ -21,6 +21,7 @@ class Login:
         if user and user.actived and check_password(user.password, password):
             web.ctx.session.login = 1
             web.ctx.session.uid = user.id
+
             raise web.seeother('/home')
         else:
             web.ctx.msg = u'帐号不存在或与密码符，请重新核对或该帐号还未激活'
@@ -41,7 +42,7 @@ class Register:
         return render_template("auth/reg.html")
 
     def POST(self):
-        context = {}
+        context = web.ctx.request
         i = web.input()
         email = i.email.strip()
         password = i.password
@@ -94,7 +95,7 @@ class Active:
 
 class SetProfile:
     def GET(self):
-        context = {}
+        context = web.ctx.session.request
         uid = web.ctx.session.uid
         user = web.ctx.orm.query(User).filter(User.id==int(uid)).first()
         email = user.email
@@ -126,7 +127,7 @@ class SetProfile:
 
 class Succ:
     def GET(self):
-        context = {}
+        context = web.ctx.request
         context['email'] = web.ctx.session.email
 
         return render_template("auth/succ.html", **context)

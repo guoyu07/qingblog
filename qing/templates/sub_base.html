@@ -11,7 +11,9 @@
     <ul id="nav">
       <li><a href="/">首页</a></li>
       <li><a href="/home">Home</a></li>
-      <li><a href="/auth/logout">退出</a></li>
+      {% if user %}
+        <li><a href="/auth/logout">退出</a></li>
+      {% endif %}
     </ul>
   </div><!-- end container -->
 </div><!-- end header -->
